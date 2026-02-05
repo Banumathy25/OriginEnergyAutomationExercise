@@ -112,10 +112,16 @@ class BasePage {
       }
     }
   }
-    async verifyPlansVisible() {
+  async verifyPlansVisible() {
     await this.scrollDown(800);
     await this.assertVisible(this.planInfoTable)
   }
-
+  async takeScreenshot(name = 'screenshot') {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const path = `./screenshots/${name}-${timestamp}.png`;
+    await this.page.screenshot({ path, fullPage: true });
+    console.log(`📸 Screenshot saved: ${path}`);
+    return path;
+  }
 }
 module.exports = { BasePage };

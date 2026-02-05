@@ -17,13 +17,24 @@ class PlansPage extends BasePage {
   async openPlanInNewTab(rowIndex = 0) {
     const planLink = this.planRows.nth(rowIndex).locator('a'); // link inside the row
     await this.assertVisible(planLink); // fixed here
+    let newPage;
 
-    const [newPage] = await Promise.all([
-      this.page.waitForEvent('popup'), // wait for new tab
-      planLink.click() // click opens new tab
-    ]);
-    await newPage.waitForLoadState('domcontentloaded');
-    await new Promise(resolve => setTimeout(resolve, 8000));
+    try {
+      // Wait for popup and click the link simultaneously
+      [newPage] = await Promise.all([
+        this.page.waitForEvent('popup'),
+        planLink.click(),
+      ]);  // Wait for new page to load
+      await newPage.waitForLoadState('domcontentloaded');
+
+      // Optional: wait a bit for PDF to start loading
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+    } catch (err) {
+      // Take screenshot if anything fails
+      await this.takeScreenshot('openPlanInNewTab-failed');
+      throw err; // re-throw so test still fails
+    }
     return new PlanDetailsPage(newPage);
   }
 }
