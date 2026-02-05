@@ -1,0 +1,28 @@
+{
+  "name": "originenergyautomationexercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "End-to-end test automation for the Origin Energy website using Playwright (JavaScript).",
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "@types/node": "^24.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
+}
