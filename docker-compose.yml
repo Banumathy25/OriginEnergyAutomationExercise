@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  tests:
+    build: .
+    container_name: origin-tests
+    environment:
+      - TEST_ADDRESS="17 Bolinda Road, Balwyn North, VIC 3104"
+      - CI=true
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+
